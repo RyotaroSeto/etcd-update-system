@@ -17,7 +17,5 @@ func NewClient() (*clientv3.Client, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer client.Close()
-
 	return client, nil
 }

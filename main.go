@@ -6,19 +6,21 @@ import (
 	"net"
 	"os"
 	"os/signal"
-	"sync"
 	"syscall"
 
+	pb "etcd-update-system/pkg/gen/something/v1"
+
+	"etcd-update-system/internal/server"
+
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/reflection"
 )
 
 func main() {
 	err := run()
-
 	if err != nil {
 		log.Fatalf("Couldn't run: %s", err)
 	}
-
 }
 
 func run() error {
@@ -27,36 +29,21 @@ func run() error {
 	if err != nil {
 		return err
 	}
-	server := grpc.NewServer()
-	// pb.RegisterGreeterServer(grpc, &gSrv)
-	// client, err := etcd.NewClient()
-	// if err != nil {
-	// 	log.Fatal(err)
-	// }
-	// server, err := newServer(serverConfig{
-	// 	Address: address,
-	// 	DB:      pool,
-	// 	etcd:    esClient,
-	// })
+	s := grpc.NewServer()
+	reflection.Register(s)
+	pb.RegisterServiceServer(s, server.NewSystemServer())
+
+	go func() {
+		log.Printf("start gRPC server port: %v", port)
+		s.Serve(l)
+	}()
 
 	quit := make(chan os.Signal, 1)
 	signal.Notify(quit, os.Interrupt, syscall.SIGTERM)
-	wg := sync.WaitGroup{}
-	wg.Add(1)
-	go func() {
-		s := <-quit
-		log.Printf("got signal %v, attempting graceful shutdown", s)
-		server.GracefulStop()
-		wg.Done()
-	}()
+	<-quit
+	log.Println("stopping gRPC server...")
+	s.GracefulStop()
 
-	log.Printf("start gRPC server port: %v", port)
-	err = server.Serve(l)
-	if err != nil {
-		log.Fatalf("could not serve: %v", err)
-	}
-
-	wg.Wait()
 	log.Println("clean shutdown")
 	return nil
 }
