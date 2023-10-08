@@ -1,0 +1,26 @@
+name: Test
+
+on:
+  pull_request:
+    branches-ignore:
+      - main
+      - dev
+
+jobs:
+  golang-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-go@v4
+        with:
+          go-version-file: go.mod
+      - uses: actions/checkout@v4
+      - uses: reviewdog/action-golangci-lint@v2
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          golangci_lint_flags: "--config=./.golangci.yml ./..."
+          fail_on_error: true
+          reporter: "github-pr-review"
+
+      - run: go test ./... -coverprofile=coverage.out
+      - name: report coverage
+        uses: k1LoW/octocov-action@v0
