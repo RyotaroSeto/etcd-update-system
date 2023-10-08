@@ -4,6 +4,9 @@ import (
 	"context"
 	"etcd-update-system/internal/etcd"
 	pb "etcd-update-system/pkg/gen/something/v1"
+
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/status"
 )
 
 func (s *systemServer) Update(ctx context.Context, req *pb.ServiceUpdateRequest) (*pb.ServiceUpdateResponse, error) {
@@ -13,15 +16,19 @@ func (s *systemServer) Update(ctx context.Context, req *pb.ServiceUpdateRequest)
 	}
 	defer client.Close()
 
-	_, err = client.Put(ctx, "/key", "yes")
+	if req.GetValue() == "" {
+		return nil, status.Errorf(codes.InvalidArgument, "Name is blank")
+	}
+	v := req.GetValue()
+	_, err = client.Put(ctx, "/key", v)
 	if err != nil {
 		return nil, err
 	}
+
 	return &pb.ServiceUpdateResponse{
-		Message: "OK",
+		Result: "OK",
 	}, nil
 }
 
-// errだとかえせないからどうにかする
-// リクエスト受け取る
+// エラーハンドリング
 // 環境変数valult

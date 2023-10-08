@@ -28,7 +28,7 @@
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| key | [string](#string) |  |  |
+| value | [string](#string) |  |  |
 
 
 
@@ -43,7 +43,7 @@
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| message | [string](#string) |  |  |
+| result | [string](#string) |  |  |
 
 
 
