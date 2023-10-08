@@ -12,23 +12,23 @@ import (
 func (s *systemServer) Update(ctx context.Context, req *pb.ServiceUpdateRequest) (*pb.ServiceUpdateResponse, error) {
 	client, err := etcd.NewClient()
 	if err != nil {
-		return nil, err
+		return nil, status.Errorf(codes.Internal, "Failed to create etcd client: %v", err)
 	}
-	defer client.Close()
+	defer func() {
+		_ = client.Close()
+	}()
 
-	if req.GetValue() == "" {
+	v := req.GetValue()
+	if v == "" {
 		return nil, status.Errorf(codes.InvalidArgument, "Name is blank")
 	}
-	v := req.GetValue()
+
 	_, err = client.Put(ctx, "/key", v)
 	if err != nil {
-		return nil, err
+		return nil, status.Errorf(codes.Internal, "Failed to update value in etcd: %v", err)
 	}
 
 	return &pb.ServiceUpdateResponse{
 		Result: "OK",
 	}, nil
 }
-
-// エラーハンドリング
-// 環境変数valult
