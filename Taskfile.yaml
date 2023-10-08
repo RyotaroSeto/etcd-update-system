@@ -12,3 +12,15 @@ tasks:
       - |
         cd ./protobuf
         buf generate
+
+  grpc_list:
+    cmds:
+      - grpcurl -plaintext localhost:8585 list
+
+  grpc_target:
+    cmds:
+      - grpcurl -plaintext localhost:8585 list something.v1.Service
+
+  grpc_update:
+    cmds:
+      - grpcurl -plaintext localhost:8585  something.v1.Service.Update
