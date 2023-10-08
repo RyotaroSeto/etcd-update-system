@@ -1,0 +1,14 @@
+# https://taskfile.dev
+
+version: "3"
+
+tasks:
+  proto_lint:
+    cmds:
+      - buf lint ./protobuf
+
+  proto_gen:
+    cmds:
+      - |
+        cd ./protobuf
+        buf generate

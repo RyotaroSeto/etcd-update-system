@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package something.v1;
+
+message ServiceUpdateRequest {
+    string key = 1;
+}
+
+message ServiceUpdateResponse {
+    string message = 1;
+}
+
+service Service {
+    // rpc Chack(ServiceUpdateRequest) returns (ServiceUpdateResponse);
+    rpc Update(ServiceUpdateRequest) returns (ServiceUpdateResponse);
+}
