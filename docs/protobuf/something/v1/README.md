@@ -4,6 +4,8 @@
 ## Table of Contents
 
 - [something/v1/system.proto](#something_v1_system-proto)
+    - [ServiceChackRequest](#something-v1-ServiceChackRequest)
+    - [ServiceChackResponse](#something-v1-ServiceChackResponse)
     - [ServiceUpdateRequest](#something-v1-ServiceUpdateRequest)
     - [ServiceUpdateResponse](#something-v1-ServiceUpdateResponse)
   
@@ -17,6 +19,31 @@
 <p align="right"><a href="#top">Top</a></p>
 
 ## something/v1/system.proto
+
+
+
+<a name="something-v1-ServiceChackRequest"></a>
+
+### ServiceChackRequest
+
+
+
+
+
+
+
+<a name="something-v1-ServiceChackResponse"></a>
+
+### ServiceChackResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| result | [string](#string) |  |  |
+
+
+
 
 
 
@@ -63,7 +90,8 @@
 
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
-| Update | [ServiceUpdateRequest](#something-v1-ServiceUpdateRequest) | [ServiceUpdateResponse](#something-v1-ServiceUpdateResponse) | rpc Chack(ServiceUpdateRequest) returns (ServiceUpdateResponse); |
+| Chack | [ServiceChackRequest](#something-v1-ServiceChackRequest) | [ServiceChackResponse](#something-v1-ServiceChackResponse) |  |
+| Update | [ServiceUpdateRequest](#something-v1-ServiceUpdateRequest) | [ServiceUpdateResponse](#something-v1-ServiceUpdateResponse) |  |
 
  
 

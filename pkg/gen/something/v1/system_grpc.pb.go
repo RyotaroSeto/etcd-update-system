@@ -19,6 +19,7 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
+	Service_Chack_FullMethodName  = "/something.v1.Service/Chack"
 	Service_Update_FullMethodName = "/something.v1.Service/Update"
 )
 
@@ -26,7 +27,7 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ServiceClient interface {
-	// rpc Chack(ServiceUpdateRequest) returns (ServiceUpdateResponse);
+	Chack(ctx context.Context, in *ServiceChackRequest, opts ...grpc.CallOption) (*ServiceChackResponse, error)
 	Update(ctx context.Context, in *ServiceUpdateRequest, opts ...grpc.CallOption) (*ServiceUpdateResponse, error)
 }
 
@@ -36,6 +37,15 @@ type serviceClient struct {
 
 func NewServiceClient(cc grpc.ClientConnInterface) ServiceClient {
 	return &serviceClient{cc}
+}
+
+func (c *serviceClient) Chack(ctx context.Context, in *ServiceChackRequest, opts ...grpc.CallOption) (*ServiceChackResponse, error) {
+	out := new(ServiceChackResponse)
+	err := c.cc.Invoke(ctx, Service_Chack_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *serviceClient) Update(ctx context.Context, in *ServiceUpdateRequest, opts ...grpc.CallOption) (*ServiceUpdateResponse, error) {
@@ -51,7 +61,7 @@ func (c *serviceClient) Update(ctx context.Context, in *ServiceUpdateRequest, op
 // All implementations must embed UnimplementedServiceServer
 // for forward compatibility
 type ServiceServer interface {
-	// rpc Chack(ServiceUpdateRequest) returns (ServiceUpdateResponse);
+	Chack(context.Context, *ServiceChackRequest) (*ServiceChackResponse, error)
 	Update(context.Context, *ServiceUpdateRequest) (*ServiceUpdateResponse, error)
 	mustEmbedUnimplementedServiceServer()
 }
@@ -60,6 +70,9 @@ type ServiceServer interface {
 type UnimplementedServiceServer struct {
 }
 
+func (UnimplementedServiceServer) Chack(context.Context, *ServiceChackRequest) (*ServiceChackResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Chack not implemented")
+}
 func (UnimplementedServiceServer) Update(context.Context, *ServiceUpdateRequest) (*ServiceUpdateResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
 }
@@ -74,6 +87,24 @@ type UnsafeServiceServer interface {
 
 func RegisterServiceServer(s grpc.ServiceRegistrar, srv ServiceServer) {
 	s.RegisterService(&Service_ServiceDesc, srv)
+}
+
+func _Service_Chack_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ServiceChackRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ServiceServer).Chack(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Service_Chack_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ServiceServer).Chack(ctx, req.(*ServiceChackRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _Service_Update_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -101,6 +132,10 @@ var Service_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "something.v1.Service",
 	HandlerType: (*ServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "Chack",
+			Handler:    _Service_Chack_Handler,
+		},
 		{
 			MethodName: "Update",
 			Handler:    _Service_Update_Handler,
