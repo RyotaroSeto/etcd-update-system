@@ -23,4 +23,8 @@ tasks:
 
   # grpc_update:
   #   cmds:
-  #     - grpcurl -plaintext -d '{"key": "yes"}' localhost:8585  something.v1.Service.Update
+  #     - grpcurl -plaintext -d '{"value": "yes"}' localhost:8585 something.v1.Service.Update
+
+  grpc_get:
+    cmds:
+      - grpcurl -plaintext localhost:8585 something.v1.Service.Check

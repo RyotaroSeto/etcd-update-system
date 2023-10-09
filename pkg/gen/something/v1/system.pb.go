@@ -67,14 +67,14 @@ func (x *ServiceUpdateRequest) GetValue() string {
 	return ""
 }
 
-type ServiceChackRequest struct {
+type ServiceCheckRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 }
 
-func (x *ServiceChackRequest) Reset() {
-	*x = ServiceChackRequest{}
+func (x *ServiceCheckRequest) Reset() {
+	*x = ServiceCheckRequest{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_something_v1_system_proto_msgTypes[1]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -82,13 +82,13 @@ func (x *ServiceChackRequest) Reset() {
 	}
 }
 
-func (x *ServiceChackRequest) String() string {
+func (x *ServiceCheckRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ServiceChackRequest) ProtoMessage() {}
+func (*ServiceCheckRequest) ProtoMessage() {}
 
-func (x *ServiceChackRequest) ProtoReflect() protoreflect.Message {
+func (x *ServiceCheckRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_something_v1_system_proto_msgTypes[1]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -100,8 +100,8 @@ func (x *ServiceChackRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ServiceChackRequest.ProtoReflect.Descriptor instead.
-func (*ServiceChackRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use ServiceCheckRequest.ProtoReflect.Descriptor instead.
+func (*ServiceCheckRequest) Descriptor() ([]byte, []int) {
 	return file_something_v1_system_proto_rawDescGZIP(), []int{1}
 }
 
@@ -152,7 +152,7 @@ func (x *ServiceUpdateResponse) GetResult() string {
 	return ""
 }
 
-type ServiceChackResponse struct {
+type ServiceCheckResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -160,8 +160,8 @@ type ServiceChackResponse struct {
 	Result string `protobuf:"bytes,1,opt,name=result,proto3" json:"result,omitempty"`
 }
 
-func (x *ServiceChackResponse) Reset() {
-	*x = ServiceChackResponse{}
+func (x *ServiceCheckResponse) Reset() {
+	*x = ServiceCheckResponse{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_something_v1_system_proto_msgTypes[3]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -169,13 +169,13 @@ func (x *ServiceChackResponse) Reset() {
 	}
 }
 
-func (x *ServiceChackResponse) String() string {
+func (x *ServiceCheckResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ServiceChackResponse) ProtoMessage() {}
+func (*ServiceCheckResponse) ProtoMessage() {}
 
-func (x *ServiceChackResponse) ProtoReflect() protoreflect.Message {
+func (x *ServiceCheckResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_something_v1_system_proto_msgTypes[3]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -187,12 +187,12 @@ func (x *ServiceChackResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ServiceChackResponse.ProtoReflect.Descriptor instead.
-func (*ServiceChackResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use ServiceCheckResponse.ProtoReflect.Descriptor instead.
+func (*ServiceCheckResponse) Descriptor() ([]byte, []int) {
 	return file_something_v1_system_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *ServiceChackResponse) GetResult() string {
+func (x *ServiceCheckResponse) GetResult() string {
 	if x != nil {
 		return x.Result
 	}
@@ -208,19 +208,19 @@ var file_something_v1_system_proto_rawDesc = []byte{
 	0x76, 0x69, 0x63, 0x65, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
 	0x74, 0x12, 0x14, 0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09,
 	0x52, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x22, 0x15, 0x0a, 0x13, 0x53, 0x65, 0x72, 0x76, 0x69,
-	0x63, 0x65, 0x43, 0x68, 0x61, 0x63, 0x6b, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x22, 0x2f,
+	0x63, 0x65, 0x43, 0x68, 0x65, 0x63, 0x6b, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x22, 0x2f,
 	0x0a, 0x15, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x52,
 	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x16, 0x0a, 0x06, 0x72, 0x65, 0x73, 0x75, 0x6c,
 	0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x22,
-	0x2e, 0x0a, 0x14, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x43, 0x68, 0x61, 0x63, 0x6b, 0x52,
+	0x2e, 0x0a, 0x14, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x43, 0x68, 0x65, 0x63, 0x6b, 0x52,
 	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x16, 0x0a, 0x06, 0x72, 0x65, 0x73, 0x75, 0x6c,
 	0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x32,
 	0xac, 0x01, 0x0a, 0x07, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x4e, 0x0a, 0x05, 0x43,
-	0x68, 0x61, 0x63, 0x6b, 0x12, 0x21, 0x2e, 0x73, 0x6f, 0x6d, 0x65, 0x74, 0x68, 0x69, 0x6e, 0x67,
-	0x2e, 0x76, 0x31, 0x2e, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x43, 0x68, 0x61, 0x63, 0x6b,
+	0x68, 0x65, 0x63, 0x6b, 0x12, 0x21, 0x2e, 0x73, 0x6f, 0x6d, 0x65, 0x74, 0x68, 0x69, 0x6e, 0x67,
+	0x2e, 0x76, 0x31, 0x2e, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x43, 0x68, 0x65, 0x63, 0x6b,
 	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x22, 0x2e, 0x73, 0x6f, 0x6d, 0x65, 0x74, 0x68,
 	0x69, 0x6e, 0x67, 0x2e, 0x76, 0x31, 0x2e, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x43, 0x68,
-	0x61, 0x63, 0x6b, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x51, 0x0a, 0x06, 0x55,
+	0x65, 0x63, 0x6b, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x51, 0x0a, 0x06, 0x55,
 	0x70, 0x64, 0x61, 0x74, 0x65, 0x12, 0x22, 0x2e, 0x73, 0x6f, 0x6d, 0x65, 0x74, 0x68, 0x69, 0x6e,
 	0x67, 0x2e, 0x76, 0x31, 0x2e, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x55, 0x70, 0x64, 0x61,
 	0x74, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x23, 0x2e, 0x73, 0x6f, 0x6d, 0x65,
@@ -254,14 +254,14 @@ func file_something_v1_system_proto_rawDescGZIP() []byte {
 var file_something_v1_system_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_something_v1_system_proto_goTypes = []interface{}{
 	(*ServiceUpdateRequest)(nil),  // 0: something.v1.ServiceUpdateRequest
-	(*ServiceChackRequest)(nil),   // 1: something.v1.ServiceChackRequest
+	(*ServiceCheckRequest)(nil),   // 1: something.v1.ServiceCheckRequest
 	(*ServiceUpdateResponse)(nil), // 2: something.v1.ServiceUpdateResponse
-	(*ServiceChackResponse)(nil),  // 3: something.v1.ServiceChackResponse
+	(*ServiceCheckResponse)(nil),  // 3: something.v1.ServiceCheckResponse
 }
 var file_something_v1_system_proto_depIdxs = []int32{
-	1, // 0: something.v1.Service.Chack:input_type -> something.v1.ServiceChackRequest
+	1, // 0: something.v1.Service.Check:input_type -> something.v1.ServiceCheckRequest
 	0, // 1: something.v1.Service.Update:input_type -> something.v1.ServiceUpdateRequest
-	3, // 2: something.v1.Service.Chack:output_type -> something.v1.ServiceChackResponse
+	3, // 2: something.v1.Service.Check:output_type -> something.v1.ServiceCheckResponse
 	2, // 3: something.v1.Service.Update:output_type -> something.v1.ServiceUpdateResponse
 	2, // [2:4] is the sub-list for method output_type
 	0, // [0:2] is the sub-list for method input_type
@@ -289,7 +289,7 @@ func file_something_v1_system_proto_init() {
 			}
 		}
 		file_something_v1_system_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ServiceChackRequest); i {
+			switch v := v.(*ServiceCheckRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -313,7 +313,7 @@ func file_something_v1_system_proto_init() {
 			}
 		}
 		file_something_v1_system_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ServiceChackResponse); i {
+			switch v := v.(*ServiceCheckResponse); i {
 			case 0:
 				return &v.state
 			case 1:

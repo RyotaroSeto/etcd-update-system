@@ -4,8 +4,8 @@
 ## Table of Contents
 
 - [something/v1/system.proto](#something_v1_system-proto)
-    - [ServiceChackRequest](#something-v1-ServiceChackRequest)
-    - [ServiceChackResponse](#something-v1-ServiceChackResponse)
+    - [ServiceCheckRequest](#something-v1-ServiceCheckRequest)
+    - [ServiceCheckResponse](#something-v1-ServiceCheckResponse)
     - [ServiceUpdateRequest](#something-v1-ServiceUpdateRequest)
     - [ServiceUpdateResponse](#something-v1-ServiceUpdateResponse)
   
@@ -22,19 +22,19 @@
 
 
 
-<a name="something-v1-ServiceChackRequest"></a>
+<a name="something-v1-ServiceCheckRequest"></a>
 
-### ServiceChackRequest
-
-
+### ServiceCheckRequest
 
 
 
 
 
-<a name="something-v1-ServiceChackResponse"></a>
 
-### ServiceChackResponse
+
+<a name="something-v1-ServiceCheckResponse"></a>
+
+### ServiceCheckResponse
 
 
 
@@ -90,7 +90,7 @@
 
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
-| Chack | [ServiceChackRequest](#something-v1-ServiceChackRequest) | [ServiceChackResponse](#something-v1-ServiceChackResponse) |  |
+| Check | [ServiceCheckRequest](#something-v1-ServiceCheckRequest) | [ServiceCheckResponse](#something-v1-ServiceCheckResponse) |  |
 | Update | [ServiceUpdateRequest](#something-v1-ServiceUpdateRequest) | [ServiceUpdateResponse](#something-v1-ServiceUpdateResponse) |  |
 
  

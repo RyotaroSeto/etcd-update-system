@@ -6,18 +6,18 @@ message ServiceUpdateRequest {
     string value = 1;
 }
 
-message ServiceChackRequest {
+message ServiceCheckRequest {
 }
 
 message ServiceUpdateResponse {
     string result = 1;
 }
 
-message ServiceChackResponse {
+message ServiceCheckResponse {
     string result = 1;
 }
 
 service Service {
-    rpc Chack(ServiceChackRequest) returns (ServiceChackResponse);
+    rpc Check(ServiceCheckRequest) returns (ServiceCheckResponse);
     rpc Update(ServiceUpdateRequest) returns (ServiceUpdateResponse);
 }
