@@ -1,10 +1,10 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"log"
 	"net"
-	"os"
 	"os/signal"
 	"syscall"
 
@@ -23,27 +23,30 @@ func main() {
 	}
 }
 
+const port = 8585
+
 func run() error {
-	port := 8585
+	ctx, cancel := signal.NotifyContext(context.Background(), syscall.SIGINT, syscall.SIGTERM)
+	defer cancel()
+
 	l, err := net.Listen("tcp", fmt.Sprintf(":%d", port))
 	if err != nil {
 		return err
 	}
-	s := grpc.NewServer()
-	reflection.Register(s)
-	pb.RegisterServiceServer(s, server.NewSystemServer())
+
+	srv := grpc.NewServer()
+	reflection.Register(srv)
+	pb.RegisterServiceServer(srv, server.NewSystemServer())
 
 	go func() {
-		log.Printf("start gRPC server port: %v", port)
-		s.Serve(l)
+		<-ctx.Done()
+		srv.GracefulStop()
 	}()
 
-	quit := make(chan os.Signal, 1)
-	signal.Notify(quit, os.Interrupt, syscall.SIGTERM)
-	<-quit
-	log.Println("stopping gRPC server...")
-	s.GracefulStop()
+	err = srv.Serve(l)
+	if err != nil {
+		log.Fatalf("could not serve: %v", err)
+	}
 
-	log.Println("clean shutdown")
 	return nil
 }
